@@ -14,13 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Build & Push the Docker image
       run: docker build . --file Dockerfile --tag vitexsoftware/multiflexi-demo:${{github.run_number}}
-
-  push:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
     - name: Push the Docker image to Docker Hub
       run: docker push vitexsoftware/multiflexi-demo:${{github.run_number}}
       env:
