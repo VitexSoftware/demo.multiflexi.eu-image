@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     options {
         buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
         timestamps()
@@ -11,12 +11,6 @@ pipeline {
 
     stages {
       stage('Building image') {
-        agent {
-            // Equivalent to "docker build -f Dockerfile.build --build-arg version=1.0.2 ./build/
-            dockerfile {
-                filename 'doc/demo/Dockerfile.demo'
-            }
-        }
         steps {
           script {
             dockerImage = docker.build registry + ":$BUILD_NUMBER"
