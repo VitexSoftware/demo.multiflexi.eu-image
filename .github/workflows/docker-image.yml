@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build & Push the Docker image
       run: docker build . --file Dockerfile --tag vitexsoftware/multiflexi-demo:${{github.run_number}}
-    - name: Login to Docker Hub
+    - name: Login as ${{ secrets.DOCKER_USERNAME }} to Docker Hub
       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}  
     - name: Push the Docker image to Docker Hub
       run: docker push vitexsoftware/multiflexi-demo:${{github.run_number}}
